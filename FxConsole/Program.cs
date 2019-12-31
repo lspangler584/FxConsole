@@ -7,7 +7,7 @@ using Timer = System.Threading.Timer;
 
 namespace FxConsole
 {
-	class Program
+	public class Program
 	{
 		public static Dictionary<string, float> ParamDictionary= new Dictionary<string, float>();
 		public const string Gen0SizeName = "Gen0Size";
