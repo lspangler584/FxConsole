@@ -18,6 +18,13 @@ steps:
     restoreSolution: 'FxConsole.sln' 
 
 - task: SonarCloudPrepare@1
+condition: |
+  and
+  (
+    succeeded(),
+    eq(variables['Build.Reason'], 'PullRequest'),
+    eq(variables['System.PullRequest.TargetBranch'], 'master')
+  )
   displayName: 'Prepare SonarCloud analysis'
   inputs:
     SonarCloud: 'SonarCloud connection 1'
@@ -42,9 +49,24 @@ steps:
     targetFolder: '$(Build.ArtifactStagingDirectory)/FxConsole'
 
 - task: SonarCloudAnalyze@1
+condition: |
+  and
+  (
+    succeeded(),
+    eq(variables['Build.Reason'], 'PullRequest'),
+    eq(variables['System.PullRequest.TargetBranch'], 'master')
+  )
+
   displayName: 'Run SonarCloud code analysis'
 
 - task: SonarCloudPublish@1
+condition: |
+  and
+  (
+    succeeded(),
+    eq(variables['Build.Reason'], 'PullRequest'),
+    eq(variables['System.PullRequest.TargetBranch'], 'master')
+  )
   displayName: 'Publish SonarCloud quality gate results'
 
 
