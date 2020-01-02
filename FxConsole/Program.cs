@@ -7,7 +7,7 @@ using Timer = System.Threading.Timer;
 
 namespace FxConsole
 {
-	class Program
+	public class Program
 	{
 		public static Dictionary<string, float> ParamDictionary= new Dictionary<string, float>();
 		public const string Gen0SizeName = "Gen0Size";
@@ -21,6 +21,8 @@ namespace FxConsole
 			Console.WriteLine("enter any key to begin...");
 			Console.ReadLine();
 
+			var y = +1;
+
 			timer1.Elapsed += new ElapsedEventHandler(OnTimer1);
 			timer1.Interval = 20000;
 			timer1.Enabled = true;
@@ -32,14 +34,11 @@ namespace FxConsole
 			ParamDictionary.Add(Gen0SizeName, 34f);
 			ParamDictionary.Add(Gen1SizeName, 44f);
 
-			var d = new LongListOfParams(ParamDictionary);
+			var d = new longListOfParams(ParamDictionary);
 
 			Agent = NewRelic.Api.Agent.NewRelic.GetAgent();
 
-			while (true)
-			{
-				var x = DoSomething("wash your car");
-			}
+			while (true) { var x = DoSomething("wash your car"); }
 		}
 
 		private static void OnTimer1(object source, ElapsedEventArgs e)
@@ -83,12 +82,12 @@ namespace FxConsole
 			return 10;
 		}
 
-		public class LongListOfParams
+		public class longListOfParams
 		{
 			public float gen0size;
 			public float gen1size;
 
-			public LongListOfParams(Dictionary<string, float> paramDictionary)
+			public longListOfParams(Dictionary<string, float> paramDictionary)
 			{
 				gen0size = ParamDictionary[Gen0SizeName];
 				gen1size = ParamDictionary[Gen1SizeName];
