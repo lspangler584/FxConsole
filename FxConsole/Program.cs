@@ -34,7 +34,7 @@ namespace FxConsole
 			ParamDictionary.Add(Gen0SizeName, 34f);
 			ParamDictionary.Add(Gen1SizeName, 44f);
 
-			var d = new LongListOfParams(ParamDictionary);
+			var d = new longListOfParams(ParamDictionary);
 
 			Agent = NewRelic.Api.Agent.NewRelic.GetAgent();
 
