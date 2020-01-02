@@ -38,10 +38,7 @@ namespace FxConsole
 
 			Agent = NewRelic.Api.Agent.NewRelic.GetAgent();
 
-			while (true)
-			{
-				var x = DoSomething("wash your car");
-			}
+			while (true) { var x = DoSomething("wash your car"); }
 		}
 
 		private static void OnTimer1(object source, ElapsedEventArgs e)
