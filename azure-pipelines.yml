@@ -50,6 +50,11 @@ steps:
   condition: and ( succeeded(), eq(variables['Build.Reason'], 'PullRequest'), eq(variables['System.PullRequest.TargetBranch'], 'master'))
   displayName: 'Publish SonarCloud quality gate results'
 
+- task: sonarcloud-buildbreaker@2
+  inputs:
+    SonarCloud: 'SonarCloud connection 1'
+    organization: 'lspangler'
+
 
 - task: PublishBuildArtifacts@1
 
