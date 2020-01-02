@@ -21,8 +21,6 @@ namespace FxConsole
 			Console.WriteLine("enter any key to begin...");
 			Console.ReadLine();
 
-			var y = +1;
-
 			timer1.Elapsed += new ElapsedEventHandler(OnTimer1);
 			timer1.Interval = 20000;
 			timer1.Enabled = true;
@@ -56,8 +54,9 @@ namespace FxConsole
 		[Transaction]
 		public static int DoSomething(string whatToDo)
 		{
-			var y = whatToDo;
+			//var y = whatToDo;
 			//Console.WriteLine($"what I'm doing: {y}");
+
 			ParamDictionary.Add(Guid.NewGuid().ToString(), 88);
 			Thread.Sleep(1000);
 			try
