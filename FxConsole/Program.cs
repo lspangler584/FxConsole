@@ -82,12 +82,12 @@ namespace FxConsole
 			return 10;
 		}
 
-		public class LongListOfParams
+		public class longListOfParams
 		{
 			public float gen0size;
 			public float gen1size;
 
-			public LongListOfParams(Dictionary<string, float> paramDictionary)
+			public longListOfParams(Dictionary<string, float> paramDictionary)
 			{
 				gen0size = ParamDictionary[Gen0SizeName];
 				gen1size = ParamDictionary[Gen1SizeName];
