@@ -54,7 +54,7 @@ namespace FxConsole
 		[Transaction]
 		public static int DoSomething(string whatToDo)
 		{
-			//var y = whatToDo;
+			var y = whatToDo;
 			//Console.WriteLine($"what I'm doing: {y}");
 
 			ParamDictionary.Add(Guid.NewGuid().ToString(), 88);
