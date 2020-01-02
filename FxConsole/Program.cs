@@ -21,7 +21,7 @@ namespace FxConsole
 			Console.WriteLine("enter any key to begin...");
 			Console.ReadLine();
 
-			var x = +1;
+			var y = +1;
 
 			timer1.Elapsed += new ElapsedEventHandler(OnTimer1);
 			timer1.Interval = 20000;
