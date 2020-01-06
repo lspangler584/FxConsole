@@ -55,7 +55,7 @@ namespace FxConsole
 		public static int DoSomething(string whatToDo)
 		{
 			var y = whatToDo;
-			//Console.WriteLine($"what I'm doing: {y}");
+			Console.WriteLine($"what I'm doing: {y}");
 
 			ParamDictionary.Add(Guid.NewGuid().ToString(), 88);
 			Thread.Sleep(1000);
