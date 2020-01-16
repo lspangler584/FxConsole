@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Timers;
 using NewRelic.Api.Agent;
-using Timer = System.Threading.Timer;
 
 namespace FxConsole
 {
