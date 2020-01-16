@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Timers;
 using NewRelic.Api.Agent;
-using Timer = System.Threading.Timer;
 
 namespace FxConsole
 {
 	public class Program
 	{
-		public static Dictionary<string, float> ParamDictionary= new Dictionary<string, float>();
+		private static Dictionary<string, float> ParamDictionary= new Dictionary<string, float>();
 		public const string Gen0SizeName = "Gen0Size";
 		public const string Gen1SizeName = "Gen1Size";
-		public static System.Timers.Timer timer1 = new System.Timers.Timer();
-		public static System.Timers.Timer timer2 = new System.Timers.Timer();
-		public static NewRelic.Api.Agent.IAgent Agent;
+		private static System.Timers.Timer timer1 = new System.Timers.Timer();
+		private static System.Timers.Timer timer2 = new System.Timers.Timer();
+		private static NewRelic.Api.Agent.IAgent Agent;
 
 		static void Main(string[] args)
 		{
@@ -32,7 +31,7 @@ namespace FxConsole
 			ParamDictionary.Add(Gen0SizeName, 34f);
 			ParamDictionary.Add(Gen1SizeName, 44f);
 
-			var d = new longListOfParams(ParamDictionary);
+			var d = new LongListOfParams(ParamDictionary);
 
 			Agent = NewRelic.Api.Agent.NewRelic.GetAgent();
 
@@ -47,8 +46,7 @@ namespace FxConsole
 
 		private static void OnTimer2(object source, ElapsedEventArgs e)
 		{
-			Console.WriteLine("GC Collecting");
-			GC.Collect();
+			Console.WriteLine("GC.Collect();");
 		}
 
 		[Transaction]
@@ -70,7 +68,7 @@ namespace FxConsole
 				var lm = Agent.GetLinkingMetadata();
 				foreach (KeyValuePair<string, string> kvp in lm)
 				{
-					//Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+					Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
 				}
 
 			}
@@ -81,12 +79,12 @@ namespace FxConsole
 			return 10;
 		}
 
-		public class longListOfParams
+		public class LongListOfParams
 		{
-			public float gen0size;
-			public float gen1size;
+			public float gen0size { get; set; }
+			public float gen1size { get; set; }
 
-			public longListOfParams(Dictionary<string, float> paramDictionary)
+			public LongListOfParams(Dictionary<string, float> paramDictionary)
 			{
 				gen0size = ParamDictionary[Gen0SizeName];
 				gen1size = ParamDictionary[Gen1SizeName];
