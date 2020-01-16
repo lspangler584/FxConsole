@@ -55,6 +55,5 @@ steps:
     SonarCloud: 'SonarCloud connection 1'
     organization: 'lspangler'
 
-
 - task: PublishBuildArtifacts@1
 
