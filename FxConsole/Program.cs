@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Timers;
 using NewRelic.Api.Agent;
-using Timer = System.Threading.Timer;
 
 namespace FxConsole
 {
 	public class Program
 	{
-		public static Dictionary<string, float> ParamDictionary= new Dictionary<string, float>();
+		private static Dictionary<string, float> ParamDictionary= new Dictionary<string, float>();
 		public const string Gen0SizeName = "Gen0Size";
 		public const string Gen1SizeName = "Gen1Size";
-		public static System.Timers.Timer timer1 = new System.Timers.Timer();
-		public static System.Timers.Timer timer2 = new System.Timers.Timer();
-		public static NewRelic.Api.Agent.IAgent Agent;
+		private static System.Timers.Timer timer1 = new System.Timers.Timer();
+		private static System.Timers.Timer timer2 = new System.Timers.Timer();
+		private static NewRelic.Api.Agent.IAgent Agent;
 
 		static void Main(string[] args)
 		{
 			Console.WriteLine("enter any key to begin...");
 			Console.ReadLine();
-
-			var y = +1;
 
 			timer1.Elapsed += new ElapsedEventHandler(OnTimer1);
 			timer1.Interval = 20000;
@@ -39,6 +36,7 @@ namespace FxConsole
 			Agent = NewRelic.Api.Agent.NewRelic.GetAgent();
 
 			while (true) { var x = DoSomething("wash your car"); }
+		
 		}
 
 		private static void OnTimer1(object source, ElapsedEventArgs e)
@@ -49,15 +47,15 @@ namespace FxConsole
 
 		private static void OnTimer2(object source, ElapsedEventArgs e)
 		{
-			Console.WriteLine("GC Collecting");
-			GC.Collect();
+			Console.WriteLine("GC.Collect();");
 		}
 
 		[Transaction]
 		public static int DoSomething(string whatToDo)
 		{
 			var y = whatToDo;
-			//Console.WriteLine($"what I'm doing: {y}");
+			Console.WriteLine($"what I'm doing: {y}");
+
 			ParamDictionary.Add(Guid.NewGuid().ToString(), 88);
 			Thread.Sleep(1000);
 			try
@@ -71,7 +69,7 @@ namespace FxConsole
 				var lm = Agent.GetLinkingMetadata();
 				foreach (KeyValuePair<string, string> kvp in lm)
 				{
-					//Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+					Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
 				}
 
 			}
@@ -84,8 +82,8 @@ namespace FxConsole
 
 		public class longListofParams
 		{
-			public float gen0size;
-			public float gen1size;
+			public float gen0size { get; set; }
+			public float gen1size { get; set; }
 
 			public longListofParams(Dictionary<string, float> paramDictionary)
 			{
